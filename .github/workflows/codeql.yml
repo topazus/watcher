@@ -22,6 +22,7 @@ jobs:
       matrix:
         cxx_compiler:
           - g++
+          - clang++
         build_type:
           - Debug
         install_location:
@@ -46,6 +47,9 @@ jobs:
             ${{github.workspace}}/${{matrix.install_location}}
             ${{github.workspace}}/build/out
           key: ${{runner.os}}-codeql-dependencies
+
+      - name: Setup Clang
+        run: sudo apt install clang-15 libc++-15-dev libc++abi-15-dev
 
       - name: Setup CodeQL
         uses: github/codeql-action/init@v2
